@@ -2,10 +2,10 @@
 #define TYPE_INFO_HXX
 
 #if __cplusplus >= 201606L || _MSVC_LANG >= 201606L
-#define INLINE_VAR inline static
+#define INLINE_VAR inline
 #define CXX17_FEATURE(EXPR) EXPR
 #else
-#define INLINE_VAR static
+#define INLINE_VAR
 #define CXX17_FEATURE(EXPR)
 #endif
 
@@ -281,10 +281,10 @@ namespace std
     template <class, class> class basic_ifstream;
     template <class, class> class basic_ofstream;
     template <class, class> class basic_fstream;
-    template <class, class, class> class basic_stringbuf;
-    template <class, class, class> class basic_istringstream;
-    template <class, class, class> class basic_ostringstream;
-    template <class, class, class> class basic_stringstream;
+    // template <class, class, class> class basic_stringbuf;
+    // template <class, class, class> class basic_istringstream;
+    // template <class, class, class> class basic_ostringstream;
+    // template <class, class, class> class basic_stringstream;
     template <class...> class tuple;
     template <class...> class variant;
     template <class, class, class> class set;
