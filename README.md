@@ -6,7 +6,7 @@ A header-only library which can provide more feature than std::type_info
 - GetTypeInfo<T>: get TypeInfo object of a type (constexpr)
 - TypeName(const TypeInfo&): get a human-readable name of TypeInfo object (unlike typeid(T).name())
 
-### Limitation
+### Limitations
 - Do not support non-type template (i.e. std::array<T, std::size_t>)
 - Do not support function types and template types which have more than 10 arguments (if your function have more than 10 arguments, you should consider rewrite it.)
 
@@ -19,7 +19,7 @@ A header-only library which can provide more feature than std::type_info
 - c++11 or above
 
 ### Implement GetTypeInfo<> for your class type:
-- Use InstantiateTypeInfo(YourType) for your non-template class
+- Use InstantiateTypeInfo(YourType) for non-template class
 - Use InstantiateTemplateTypeInfo(YourType) for template class with one template argument
 - Use InstantiateTemplateTypeInfoMultiArgs(YourType) for template class with multiple template arguments
 
