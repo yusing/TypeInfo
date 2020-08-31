@@ -205,7 +205,7 @@ inline std::string FormatArgList(const ArgsList& args) {
 
 inline std::string TypeName(const TypeInfo& info) {
     std::string name;
-    const auto  qualifier = info.qualifier; // if qOverride is not 0, override
+    const auto  qualifier = info.qualifier;
     name.reserve(200);
     if (qualifier && Qualifier::Const) name.append("const ");
     if (qualifier && Qualifier::Volatile) name.append("volatile ");
