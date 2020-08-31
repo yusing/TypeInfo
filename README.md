@@ -8,6 +8,7 @@ A header-only library which can provide more feature than std::type_info
 
 ### Limitation
 - Do not support non-type template (i.e. std::array<T, std::size_t>)
+- Do not support function types and template types which have more than 10 arguments (if your function have more than 10 arguments, you should consider rewrite it.)
 
 ### Tested On
 - clang version 10.0.0
