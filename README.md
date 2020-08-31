@@ -17,7 +17,7 @@ A header-only library which can provide more feature than std::type_info
 - MSVC v142
 
 ### Requirements
-- c++11 or above
+- a c++ compiler that support constexpr
 
 ### Implement GetTypeInfo<> for your class type:
 - Use InstantiateTypeInfo(YourType) for non-template class
