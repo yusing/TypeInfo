@@ -5,6 +5,7 @@ A header-only library which can provide more feature than std::type_info
 - TypeInfo class: a class that contains information of a type (like std::type_Info)
 - GetTypeInfo<T>: get TypeInfo object of a type (constexpr)
 - TypeName(const TypeInfo&): get a human-readable name of TypeInfo object (unlike typeid(T).name())
+- Qualifier sensitive (i.e. GetTypeInfo<const int> != GetTypeInfo<int>)
 
 ### Limitations
 - Do not support non-type template (i.e. std::array<T, std::size_t>)
