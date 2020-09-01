@@ -60,11 +60,10 @@ struct TypeInfo {
         qualifier{q}, pReturnTypeInfo{&ret}, arrArgTypeInfo{args} {}
 
     friend constexpr bool operator==(const TypeInfo& lhs, const TypeInfo& rhs) {
-        if (&lhs == &rhs) return true;
         const auto eq = lhs.typeId == rhs.typeId && lhs.qualifier == rhs.qualifier;
         if (!eq) return false;
         if (lhs.pReturnTypeInfo != rhs.pReturnTypeInfo) return false;
-        if (lhs.pReturnTypeInfo != nullptr) return eq && *lhs.pReturnTypeInfo == *rhs.pReturnTypeInfo;
+        if (lhs.pReturnTypeInfo != nullptr) return *lhs.pReturnTypeInfo == *rhs.pReturnTypeInfo;
         for (size_t i = 0; i < lhs.arrArgTypeInfo.size(); ++i) {
             if (lhs.arrArgTypeInfo[i] != rhs.arrArgTypeInfo[i]) return false;
             if (lhs.arrArgTypeInfo[i] == nullptr) return eq;
@@ -117,20 +116,10 @@ template <class T> constexpr INLINE_VAR TypeInfo GetTypeInfo<T*> = {POINTER_TYPE
 template <class T> constexpr INLINE_VAR TypeInfo GetTypeInfo<T&&> = {GetTypeInfo<T>, Qualifier::LValueReference};
 template <class T> constexpr INLINE_VAR TypeInfo GetTypeInfo<T[]> = {GetTypeInfo<T>, Qualifier::Extent};
 template <class T> constexpr INLINE_VAR TypeInfo GetTypeInfo<const T> = {GetTypeInfo<T>, Qualifier::Const};
-//template <class T> constexpr INLINE_VAR TypeInfo GetTypeInfo<const T&> = {GetTypeInfo<T>, Qualifier::ConstRef};
-//template <class T> constexpr INLINE_VAR TypeInfo GetTypeInfo<const T&&> = {GetTypeInfo<T>, Qualifier::ConstLValueRef};
-//template <class T> constexpr INLINE_VAR TypeInfo GetTypeInfo<const T[]> = {GetTypeInfo<T>, Qualifier::ConstExtent};
 template <class T> constexpr INLINE_VAR TypeInfo GetTypeInfo<volatile T> = {GetTypeInfo<T>, Qualifier::Volatile};
 template <class T> constexpr INLINE_VAR TypeInfo GetTypeInfo<const volatile T> = {GetTypeInfo<T>, Qualifier::ConstVolatile};
-//template <class T> constexpr INLINE_VAR TypeInfo GetTypeInfo<volatile T[]> = {GetTypeInfo<T>, Qualifier::Volatile | Qualifier::Extent};
-//template <class T> constexpr INLINE_VAR TypeInfo GetTypeInfo<const volatile T[]> = {GetTypeInfo<T>, Qualifier::ConstVolatile | Qualifier::Extent};
 template <class T, size_t s> constexpr INLINE_VAR TypeInfo GetTypeInfo<T[s]> = {GetTypeInfo<T>, Qualifier::Extent};
-//template <class T, size_t s> constexpr INLINE_VAR TypeInfo& GetTypeInfo<const T[s]> = GetTypeInfo<const T[]>;
-//template <class T, size_t s> constexpr INLINE_VAR TypeInfo& GetTypeInfo<volatile T[s]> = GetTypeInfo<volatile T[]>;
-//template <class T, size_t s> constexpr INLINE_VAR TypeInfo& GetTypeInfo<const volatile T[s]> = GetTypeInfo<const volatile T[]>;
 template <class T> constexpr INLINE_VAR TypeInfo GetTypeInfo<T*[]> = {GetTypeInfo<T*>, Qualifier::Extent};
-//template <class T> constexpr INLINE_VAR TypeInfo GetTypeInfo<const T*[]> = {GetTypeInfo<T*>, Qualifier::ConstExtent};
-
 
 template <class... Args> constexpr INLINE_VAR ArgsList GetArgTypeInfo = {&GetTypeInfo<void>};
 
